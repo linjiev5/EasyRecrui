@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy求人</title>
+<link rel="stylesheet" href="../css/banner.css" type="text/css">
+<link rel="stylesheet" href="../css/top.css" type="text/css">
+
+</head>
+
+<body>
+
+	<!--ヘッド部分-->
+	<div class="w100per bgwri  pos_f left0 top0"
+		style="height: 70px; z-index: 20000" th:fragment="top">
+		<a th:href="@{/main}">
+			<div class="pos_a " style="width: 370px; left: 100px; top: 0px">
+				<img src="../img/city.jpg" class="fl margint13">
+				<div class="fl fnt18 fncolorlan marginl20 "
+					style="width: 230px; height: 70px; line-height: 70px;" id="zgno1">Easy求人サイト</div>
+			</div>
+		</a>
+
+		<div class=" center  fnt18 "
+			style="width: 600px; height: 70px; line-height: 70px">
+			<a href="/main">
+				<div class="fl ta_c  fncolorhui pos_r" style="width: 54px;">
+					正社員
+					<div class="pos_a bottom0 bghong1"
+						style="width: 30px; height: 4px; left: 5px"></div>
+				</div>
+			</a> <a href="">
+				<div class="fl marginl50   fncolorhui pos_r";>アルバイト</div>
+			</a>
+
+		</div>
+		<!-- 右の部分 -->
+		<div class="pos_a"
+			style="width: 220px; right: 100px; top: 0px; height: 70px; line-height: 70px"
+			th:unless="${session?.loginUser}">
+
+			<a th:href="@{/login}" >
+				<div class="fl fnt10 fncolorhui" style="width: 90px;">応募</div>
+			</a> <a href="" >
+				<div class="fl fnt10  marginl40 fncolorhui" style="width: 90px;">企業</div>
+			</a>
+		</div>
+		<div class="pos_a"
+			style="width: 220px; right: 100px; top: 0px; height: 70px; line-height: 70px"
+			th:if="${session?.loginUser}">
+			<a th:href="@{/login/mypage}" th:text="${session?.loginUser?.name}"></a>
+
+
+				<a th:href="@{/logout}" style="color: red">ログアウト</a>
+
+
+
+
+
+
+		</div>
+		<!--ライン-->
+		<hr color="#87ceeb" size="3" />
+	</div>
+	<!-- 左の部分 -->
+	<nav class="navbar-default navbar-side" role="navigation"
+		th:fragment="sidebar">
+		<div id="sideNav"></div>
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+
+				<li><a class="active-menu" th:href="@{/login/mypage}"><i
+						class="fa fa-dashboard"></i> 個人情報</a></li>
+				<li><a th:href="@{/resume}"><i class="fa fa-desktop"></i>
+						履歴書</a></li>
+
+			</ul>
+
+		</div>
+
+	</nav>
+
+	<!--foot部分-->
+	<div class="w100per bghui  fl " style="height: 190px"
+		th:fragment="foot">
+		<div class=" center  fnt18 fncolorshenhui" style="height: 180px">
+			<div class="fl " style="width: 100px">
+				<div class="fl  margint30" style="width: 100px">Easy求人</div>
+				<a href="">
+					<div class="fl  margint30 fncolorhui" style="width: 100px">情報保護</div>
+				</a> <a href="">
+					<div class="fl  margint10 fncolorhui" style="width: 100px">ヘルプ</div>
+				</a>
+			</div>
+			<div class="fr marginl80" style="width: 600px">
+				<div class="fr w100per margint30">開発者Wechat</div>
+				<div class="fr w100per margint30"></div>
+				林杰(リンケツ)
+			</div>
+
+
+
+
+			<div class="fr fnt18 marginl20 " style="width: 150px">
+
+
+				<img src="../img/myWechat.png" class="fr margint20 footewm"
+					id="footewm2" style="width: 159px; height: 150px">
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

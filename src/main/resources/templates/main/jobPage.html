@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Easy求人</title>
+	<link rel="stylesheet" href="../css/banner.css" type="text/css">
+	<link rel="stylesheet" href="../css/top.css" type="text/css">
+</head>
+
+<body>
+	<!--ヘッド部分-->
+	<div th:insert="~{main/part::top}"></div>
+	<!--ライン-->
+	<hr color="#87ceeb" size="3" />
+	<!--main部分-->
+	<div align="center">
+
+
+		<div id="" align="right">
+
+			<a href="/login/mypage">myページ</a>
+
+
+		</div>
+		<div style="background-image: url(tpl/images/gsmengban.png)" class="fl bgcover w100per">
+			<div class="fl  w100per bghui ">
+
+				<!-- <div class='fl w100per bgwri paddingtb20 pos_f top0  left0' style='display:none' >
+		<img src="tpl/images/ijoblogo.png" class='fl margint5' style='height:45px;width:102px;margin-left:364px' >
+		<input class='fl bgwri borderRtl5 borderRbl5 bdhuise bbox marginl60 ' style='height:54px;line-height:54px;width:890px;padding-left:60px' placeholder='请输入您想搜的职位和公司'>
+		<div class='fl bghong1 fncolorbai ta_c borderRtr5 borderRbr5 touying' style='height:54px;line-height:54px;width:130px'>搜索</div>
+	</div> -->
+
+				<div style="background-image: url(tpl/images/gsmengban.png)" class="fl bgcover w100per">
+					<div class="center">
+						<div class="fl margint40 fnt18" style="height: 54px; width: 1023px; margin-left: 67px">
+							<input id="kword" type="search" name="kword"
+								class="fl bgwri borderRtl5 borderRbl5 touying bbox fnt18" value="IT"
+								style="height: 54px; line-height: 54px; width: 890px; padding-left: 50px"
+								placeholder="会社名また職位を入力してください"> <a href="javascript:">
+								<div class="fl bghong1 fncolorbai ta_c borderRtr5 borderRbr5 touying1"
+									style="height: 54px; line-height: 54px; width: 130px"
+									onclick="location.href=&#39;?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;kword=&#39;+$(&#39;#kword&#39;).val()">
+									検索</div>
+							</a>
+						</div>
+
+						<div class="fl w100per borderR bbox bgwri margint40 paddingtb30 paddinglr50">
+							<div class="fl w100per fnt16 hang25 fncolorshenhui">
+								<div class="fl hang25">業種選択：</div>
+
+								<a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=1&amp;city_id=&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30  fncolorhongse１">IT</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=4&amp;city_id=&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30  fncolorshenhui">販売</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;city_id=&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30  fncolorhongse">OTHER</div>
+								</a>
+
+							</div>
+							<div class="fl w100per fnt16 hang25 fncolorshenhui margint20">
+								<div class="fl hang25">地域選択：</div>
+								<a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=0&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorhongse">無制限</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=1&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">東京都</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=51&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">神奈川県</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=170&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">埼玉県</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=110&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">千葉県</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=282&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">大阪府</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=-1&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">他の地域</div>
+								</a>
+							</div>
+
+							<div class="fl w100per fnt16 hang25 fncolorshenhui margint20">
+								<div class="fl hang25">雇用形式：</div>
+								<a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;c_hangye=11&amp;jobtype=&amp;city_id=&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">無制限</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=3&amp;c_hangye=11&amp;jobtype=&amp;city_id=&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30  fncolorhongse">正社員</div>
+								</a> <a
+									href="http://www.ijob.jp/index.php?ctl=Index&amp;act=joblist&amp;type=2&amp;c_hangye=11&amp;jobtype=&amp;city_id=&amp;rlang=&amp;kword=IT">
+									<div class="fl hang25 marginl30 fncolorshenhui">アルバイト</div>
+								</a>
+							</div>
+
+						</div>
+
+						<div class="fl w100per borderR bbox bgwri margint40 paddingtb30 paddinglr50">
+
+							<div class="fl    bgwri  pos_r" style="width: 933px">
+
+
+								<div id="line18204" onmouseover="lineMove(1, 18204)" onmouseout="lineMove(2, 18204)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r">
+									<a href="javascript:gouSet(18204)"></a>
+									<input type="hidden" name="duigou[]" id="gouData18204" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=18204"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">IT技術職(PG、SE、BSE、PL、PM
+												新卒可)</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">22万-80万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">ビジネス</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">荻窪徒歩5分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													有薪假期</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">日発株式会社</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line17349" onmouseover="lineMove(1, 17349)" onmouseout="lineMove(2, 17349)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r">
+									<a href="javascript:gouSet(17349)"></a>
+									<input type="hidden" name="duigou[]" id="gouData17349" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=17349"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">IT経験者募集(PG/SE)</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">25万-70万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">日常会話</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+											<div class="fr  hang30 ">契约社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">中野徒歩1分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">東研システムズ株式会社</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line22083" onmouseover="lineMove(1, 22083)" onmouseout="lineMove(2, 22083)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r">
+									<a href="javascript:gouSet(22083)"><img id="gou22083" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none;"></a>
+									<input type="hidden" name="duigou[]" id="gouData22083" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=22083"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">ITエンジニア（外国籍OK）</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">25万-60万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">ビジネス</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">京浜東北線徒歩3分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">株式会社サムキング</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line22668" onmouseover="lineMove(1, 22668)" onmouseout="lineMove(2, 22668)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r">
+									<a href="javascript:gouSet(22668)"><img id="gou22668" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none;"></a>
+									<input type="hidden" name="duigou[]" id="gouData22668" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=22668"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">ITエンジニア外国人可</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">25万～(月給)</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">日常会話</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">茅場町徒歩5分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/29</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													有薪假期</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">株式会社多言語システム研究所
+											</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line18256" onmouseover="lineMove(1, 18256)" onmouseout="lineMove(2, 18256)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r ">
+									<a href="javascript:gouSet(18256)"><img id="gou18256" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none"></a>
+									<input type="hidden" name="duigou[]" id="gouData18256" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=18256"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">诚聘IT工程师(東京・长期招聘)
+											</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">25万-70万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">日常会話</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">田町徒歩5分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">インフォシー株式会社</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line18048" onmouseover="lineMove(1, 18048)" onmouseout="lineMove(2, 18048)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r ">
+									<a href="javascript:gouSet(18048)"><img id="gou18048" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none"></a>
+									<input type="hidden" name="duigou[]" id="gouData18048" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=18048"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">IT技术者募集</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">20万-60万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">日常会話</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">上野徒歩6分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													有薪假期</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">ライブテック株式会社</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line22380" onmouseover="lineMove(1, 22380)" onmouseout="lineMove(2, 22380)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r ">
+									<a href="javascript:gouSet(22380)"><img id="gou22380" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none"></a>
+									<input type="hidden" name="duigou[]" id="gouData22380" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=22380"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">上市IT公司招正社员管理人才</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">33万-83万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">ビジネス</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">半蔵門徒歩1分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													有薪假期</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">バルテス株式会社</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line17255" onmouseover="lineMove(1, 17255)" onmouseout="lineMove(2, 17255)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r ">
+									<a href="javascript:gouSet(17255)"><img id="gou17255" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none"></a>
+									<input type="hidden" name="duigou[]" id="gouData17255" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=17255"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">IT技术者募集</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">面议(月給)</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">日常会話</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl  hang30 ">无经验可</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">田端徒歩9分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">株式会社
+												東来</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line22604" onmouseover="lineMove(1, 22604)" onmouseout="lineMove(2, 22604)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r ">
+									<a href="javascript:gouSet(22604)"><img id="gou22604" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none"></a>
+									<input type="hidden" name="duigou[]" id="gouData22604" value="0"> <a
+										href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=22604"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">IT技術職（正社員）</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">25万-60万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">日常会話</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">田町徒歩7分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													社保年金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													有薪假期</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">和進システム</div>
+											<div class="fr hangb40 fnt16 bghong1 fncolorbai ta_c"
+												style="width: 100px; border-radius: 30px; display: none">投递简历</div>
+										</div>
+									</a>
+								</div>
+
+
+								<div id="line7869" onmouseover="lineMove(1, 7869)" onmouseout="lineMove(2, 7869)"
+									class="fl paddinglr50 bbox w100per bdhuisebottom2 paddingtb45 pos_r ">
+									<a href="javascript:gouSet(7869)"><img id="gou7869" src="./ijob_files/duigou1.png"
+											class="pos_a top0"
+											style="height: 30px; width: 30px; left: 0px; display: none"></a>
+									<input type="hidden" name="duigou[]" id="gouData7869" value="0">
+									<a href="http://www.ijob.jp/index.php?ctl=Index&amp;act=jobinfo&amp;id=7869"
+										target="_blank">
+										<div class="fl w100per hang30">
+											<div class="fl w70per fnt20 hang30   overf fncolorhui">招IT技術者(PL、SE、PM)
+											</div>
+											<div class="fr w30per fnt20 hang30 overf fncolorhongse ta_r">20万-60万(月給)
+											</div>
+										</div>
+										<div class="w100per fl hang30  overf fncolorshenhui margint10"
+											style="font-size: 14px">
+											<div class="fl  hang30 ">ビジネス</div>
+											<img src="./ijob_files/fengexian.png"
+												class="fl marginl10 marginr10 margint10"
+												style="height: 10px; width: 1px">
+											<div class="fl hang30 ">中国语对应</div>
+
+
+											<div class="fr  hang30 ">正社员</div>
+
+										</div>
+										<div class="w100per fl hang20  overf fncolorshenhui" style="font-size: 14px">
+											<div class="fl hang20">
+												<img src="./ijob_files/dizhiimg.png" class="fl margint5	"
+													style="height: 13px; width: 10px">
+												<div class="fl hang20  marginl5">東京都</div>
+											</div>
+											<div class="fl  hang20 marginl20">
+												<img src="./ijob_files/ditiemig.png" class="fl margint5"
+													style="height: 13px; width: 11px">
+												<div class="fl hang20 marginl5">御徒町徒歩3分钟</div>
+											</div>
+											<div class="fr hang20">2021/01/26</div>
+										</div>
+
+										<div class="w100per fl fncolorshenhui margint10" style="font-size: 14px">
+											<div class="fl  w70per overf ">
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 13px; padding-right: 13px; border-radius: 3px">
+													有奖金</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													交通费支给</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供员工餐</div>
+												<div class="fl hang30  bbox ta_c  bdhuise1 marginr10 marginb10"
+													style="line-height: 27px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+													提供就职签证</div>
+											</div>
+											<div class="fr hang30 w30per overf fnt16 fncolorhui ta_r">トップソリューション株式会社
+											</div>
+
+									</a>
+								</div>
+
+
+
+								<div class="ta_c fr " style="height: 40px; line-height: 28px">
+									<div class="pages">
+										<div class=" fontbai fl fybo fy_ym pageCurBg" style="">1</div>
+										<a class="fotlan"
+											href="javascript:pageTo(&#39;/index.php?pN=2&amp;ctl=Index&amp;act=joblist&amp;kword=IT&amp;type=3&amp;c_hangye=11&#39;)">
+											<div class="fl fybo fy_ym ">2</div>
+										</a> <a class="fotlan"
+											href="javascript:pageTo(&#39;/index.php?pN=3&amp;ctl=Index&amp;act=joblist&amp;kword=IT&amp;type=3&amp;c_hangye=11&#39;)">
+											<div class="fl fybo fy_ym ">3</div>
+										</a> <a class="fotlan"
+											href="javascript:pageTo(&#39;/index.php?pN=4&amp;ctl=Index&amp;act=joblist&amp;kword=IT&amp;type=3&amp;c_hangye=11&#39;)">
+											<div class="fl fybo fy_ym ">4</div>
+										</a> <a class="fotlan"
+											href="javascript:pageTo(&#39;/index.php?pN=7&amp;ctl=Index&amp;act=joblist&amp;kword=IT&amp;type=3&amp;c_hangye=11&#39;)">
+											<div class="fl fybo fy_ym ">7</div>
+										</a> <a class="fontbai"
+											href="javascript:pageTo(&#39;/index.php?pN=2&amp;ctl=Index&amp;act=joblist&amp;kword=IT&amp;type=3&amp;c_hangye=11&#39;)">
+											<div class="fl  fy_shang  " style="margin-left: 5px;">次のページ</div>
+										</a>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+
+
+
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- foot -->
+		<div th:insert="~{main/part::foot}"></div>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+<!-- Bootstrap Styles-->
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<!-- FontAwesome Styles-->
+<link href="../css/font-awesome.css" rel="stylesheet" />
+<!-- Custom Styles-->
+<link href="../css/custom-styles.css" rel="stylesheet" />
+
+<link href='http://fonts.useso.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../css/banner.css" type="text/css">
+<link rel="stylesheet" href="../css/top.css" type="text/css">
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div id="wrapper">
+
+		<!--/. NAV TOP  -->
+		<div th:insert="~{main/part::top}"></div>
+		<!--ライン-->
+		<hr color="#87ceeb" size="3" />
+		<!-- /. 左側  -->
+		<div th:insert="~{main/part::sidebar}"></div>
+		<!-- 真ん中の部分 -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-header" th:text="${session?.loginUser?.name}">
+							Dashboard</h1>
+						<small>個人情報</small><a class="btn btn-primary btn-sm" th:href="@{/updateAppkyUser}"+${applyUserInfo}>編集</a>
+							<a class="btn btn-danger btn-sm" th:href=@{/withdrawal}>退会</a>
+					</div>
+				</div>
+
+
+				<table class="table table-bordered" style="color: red">
+					<thead>
+						<tr>
+							<th>名前</th>
+							<th>アカウント</th>
+							<th>メール</th>
+							<th>性別</th>
+							<th>住所</th>
+							<th>誕生日</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr th:each="data:${applyUserInfo}" th:object="${data}">
+							<td th:text="*{name}"></td>
+							<td th:text="*{mail}"></td>
+							<td th:text="*{tel}"></td>
+							<td th:text="*{sex==1?'男':'女'}"></td>
+							<td th:text="*{adress}"></td>
+							<td th:text="*{birth}"></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+
+				<!-- /.foot  -->
+				<div th:insert="main/part::foot"></div>
+
+			</div>
+			<!-- /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+
+
+
+</body>
+</html>

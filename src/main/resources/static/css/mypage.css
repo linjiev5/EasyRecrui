@@ -1,0 +1,100 @@
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+
+}
+html {
+	 font-family:"微软雅黑", 'microsoft yahei', simsun, PingFangSC-Light, 'helvetica neue', 'hiragino sans gb', arial, 'microsoft yahei ui', sans-serif;
+	}
+
+body {
+ 	font-size:14px;background: #fff;
+}
+
+body,
+button,
+dd,
+div,
+dl,
+dt,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+input,
+li,
+ol,
+p,
+td,
+textarea,
+th,
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	-webkit-overflow-scrolling: touch;
+	max-height: 100%;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+	outline: none;
+}
+
+li {
+	list-style: none
+}
+
+img {
+	border: none;
+	max-width: 100%;
+}
+
+input,
+select,
+textarea {
+	border: none;
+	outline: none;
+	background: none
+}
+
+em,
+i {
+	font-style: normal
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal
+}
+
+.clearfix::after {
+	clear: both;
+	display: block;
+	height: 0;
+	content: '';
+	visibility: hidden;
+}
+
+
+

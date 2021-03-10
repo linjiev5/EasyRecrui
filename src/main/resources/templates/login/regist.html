@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/top.css" type="text/css">
+
+</head>
+<body>
+	<div id="div_left">
+		<h1 class="fncolorhongse2">Easy求人登録</h1>
+		<p class="fncolorhongse2">
+			Easy求人<br />仕事紹介をお任せください
+		</p>
+	</div >
+		<div class="regist">
+			<h2>すべての項目を入力してください</h2>
+			<form th:action="@{/regist}" method="post">
+				<p class="margint10 fncolorhongse" th:text="${message}"
+					th:if="${not #strings.isEmpty(message)}"></p>
+				<div id="user_info">
+					<label for="text">ユーザ名（アカウント）:</label> <br /> <input type="text"
+						class="form-control" id="user" name="userId"
+						placeholder="ユーザ名を入力してください" required="required">
+				</div>
+				<div id="user_info">
+					<label for="pwd">パスワード:</label><br /> <input type="password"
+						class="form-control" id="pwd" name="userPwd"
+						placeholder="パスワードを入力してください" required="required">
+				</div>
+				<div id="user_info">
+					<label for="email">名前:</label> <br />
+					<input type="text" class="form-control" id="name"name="name"
+						placeholder="名前を入力してください" required="required">
+				</div>
+				<div id="user_info">
+					<label for="email">メール:</label><br /> <input type="text"
+						class="form-control" id="mail"name="mail" placeholder="メールを入力してください"
+						required="required">
+				</div>
+				<div id="user_info">
+					<label for="email">電話番号:</label><br /> <input type="number"
+						class="form-control" name="tel" placeholder="電話番号を入力してください"
+						required="required">
+				</div>
+				<div class="form-control">
+					<label class="radio-inline"><input type="radio" name="sex"
+						value="1" checked>男</label> <label class="radio-inline"><input
+						type="radio" name="sex" value="0">女</label>
+				</div>
+				<div id="user_info">
+					<label for="email">住所:</label> <br />
+					<input type="datetime" class="form-control" id="adress" name="adress"
+						placeholder="住所を入力してください" required="required">
+				</div>
+				<div id="user_info">
+					<label for="email">誕生日:</label><br /> <input type="date"
+						class="form-control" id="birth"name="birth" placeholder="xxxx/xx/xx"
+						required="required">
+				</div>
+				<button type="submit" class="btn btn-primary">登録</button>
+				<button type="reset" name="refill">クリア</button><a th:href=@{/login}>戻る</a>
+			</form>
+		</div>
+
+</body>
+</html>
