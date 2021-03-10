@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class RecruiInfo {
 	@Id
 	private String name;// 会社の名前
-	private String kind; // 種類
+	private String category; // 種類
 	private String position; // 職位
 	private String title;
 	private String salary; // 給与

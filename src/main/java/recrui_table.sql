@@ -7,7 +7,7 @@ create table user_login(
     user_role varchar,
     create_time timestamp,
     update_time timestamp
-)
+);
 --ユーザ情報表作成--
 create table user_info(
     id serial primary key,
@@ -19,7 +19,7 @@ create table user_info(
     adress varchar,
     nearest_station varchar,
     birthday date
-)
+);
 --会社情報--
 create table company_info(
     name varchar primary key,
@@ -32,28 +32,29 @@ create table company_info(
     picture varchar,
     adress varchar,
     nearest_station varchar
-)
+);
 --履歴書--
 create table resume(
     name varchar,
     nationality varchar, --国籍--
     nama_katakana varchar, --カタカナ--
     educational_background varchar, --学歴--
-	nearest_station varchar,--最寄駅--
-	work_experience varchar, --職歴--
-	motivation text, --希望動機--
-	self_public_relations text, --自己ＰＲ--
-	hobbies_and_skills varchar, --趣味・特技--
-	licence_or_qualification varchar--免許・資格--
-)
+    nearest_station varchar,--最寄駅--
+    work_experience varchar, --職歴--
+    motivation text, --希望動機--
+    self_public_relations text, --自己ＰＲ--
+    hobbies_and_skills varchar, --趣味・特技--
+    licence_or_qualification varchar--免許・資格--
+);
 
 --募集詳細--
 create table recrui_info(
     name varchar,
-	kind varchar,
-	Position varchar,
-	title varchar,
-	Salary varchar,--給与--
-	Welfare varchar,--福利厚生--
-	job_description text--募集詳細--
-)
+    category varchar,
+    oosition varchar,
+    title varchar,
+    salary varchar,--給与--
+    welfare varchar,--福利厚生--
+    job_description text--募集詳細--
+);
+

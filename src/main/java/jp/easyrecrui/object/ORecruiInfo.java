@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ORecruiInfo {
 
 	private String name;// 会社の名前
-	private String kind;// アルバイト、正社員
+	private String category;// アルバイト、正社員
 	private String position;// 職種
 	private String title;
 	private String salary;// 給与
