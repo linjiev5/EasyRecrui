@@ -1,5 +1,7 @@
 package jp.easyrecrui.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -22,4 +24,5 @@ public class RecruiInfo {
 	private String salary; // 給与
 	private String welfare; // 福利厚生
 	private String jobDescription; // 募集詳細
+	private Timestamp updateTime;
 }

@@ -11,6 +11,19 @@
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
+
+			<form method="post" enctype="multipart/form-data"
+					target="Upload_iframe" action="/upMyIcon" id="Upload_icon">
+					<div th:style="background-image:th:src("+"${icon}"+");height:107px;width:107px;border-radius:53px" >
+						<input accept="image/jpg, image/jpeg, image/png"
+							class="picfile pos_a touming" onchange="sendimg(this);"
+							name="Upload_file" type="file" style="top: 30px; height: 100px">
+
+						<img src="../user_icon/gentleman.png" class="fr "
+							style="width: 27px; height: 27px; margin-top: 80px"> <input
+							type="hidden" name="jianli_id" value="36252">
+					</div>
+				</form>
 				<tr>
 					<th>1</th>
 					<th>2</th>

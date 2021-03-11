@@ -1,5 +1,7 @@
 package jp.easyrecrui.service;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +23,12 @@ public class LoginService {
 	 * @param userName
 	 * @return
 	 */
-	public int fineUser(String userName) {
-		UserLogin userLogin = userLoginRepository.findByUserName(userName);
-		if (userLogin.equals(null)) {
-			return CodeType.USERNAME_NOT_EXIST.getCode();
-		} else {
+	public int findUser(String userName) {
+		UserLogin findByUserName = userLoginRepository.findByUserName(userName);
+		if (findByUserName != null) {
 			return CodeType.USER_EXIST.getCode();
+		} else {
+			return CodeType.USER_NOT_EXIST.getCode();
 		}
 	}
 
@@ -59,11 +61,33 @@ public class LoginService {
 		// boolean rocked = userLogin.isRocked();
 		if (userLogin.isRocked()) {
 			return CodeType.USER_ROCKED.getCode();
-		} else if (oUserLogin.getPassword() == userLogin.getPassword()) {
+		} else if (oUserLogin.getPassword().equals(userLogin.getPassword())) {
 			return CodeType.LOGIN_SUCESS.getCode();
 		} else {
 			return CodeType.PASSWORD_ERROR.getCode();
 		}
 	}
 
+	/**
+	 * ユーザログイン情報を登録
+	 * @param oLoginUser
+	 * @return
+	 */
+	public int addUserLogin(OUserLogin oLoginUser) {
+		if (oLoginUser.equals(null)) {
+			return CodeType.ERROR.getCode();
+		} else {
+			UserLogin userLogin = new UserLogin();
+			userLogin.setRocked(false);
+			Timestamp createTime = new Timestamp(System.currentTimeMillis());
+			userLogin.setCreateTime(createTime);
+			userLogin.setUpdateTime(createTime);
+			userLogin.setUserRole("user");
+			userLogin.setUserName(oLoginUser.getUserName());
+			userLogin.setPassword(oLoginUser.getPassword());
+			userLoginRepository.saveAndFlush(userLogin);
+			return CodeType.REGIST_SUCESS.getCode();
+		}
+
+	}
 }

@@ -8,17 +8,18 @@ create table user_login(
     create_time timestamp,
     update_time timestamp
 );
+drop table user_login
 --ユーザ情報表作成--
 create table user_info(
-    id serial primary key,
-    user_name varchar not null,
-    icon varchar,--アイコン--
+    user_name varchar primary key,
+    name varchar not null,
     mail varchar,
     tel varchar,
     sex int,
     adress varchar,
     nearest_station varchar,
-    birthday date
+    birthday date,
+    update_time timestamp
 );
 --会社情報--
 create table company_info(
@@ -31,11 +32,13 @@ create table company_info(
     icon varchar,--アイコン--
     picture varchar,
     adress varchar,
-    nearest_station varchar
+    nearest_station varchar,
+    update_time timestamp
 );
 --履歴書--
 create table resume(
-    name varchar,
+    user_name varchar,
+    icon varchar,--アイコン--
     nationality varchar, --国籍--
     nama_katakana varchar, --カタカナ--
     educational_background varchar, --学歴--
@@ -44,9 +47,9 @@ create table resume(
     motivation text, --希望動機--
     self_public_relations text, --自己ＰＲ--
     hobbies_and_skills varchar, --趣味・特技--
-    licence_or_qualification varchar--免許・資格--
+    licence_or_qualification varchar,--免許・資格--
+    update_time timestamp
 );
-
 --募集詳細--
 create table recrui_info(
     name varchar,
@@ -55,6 +58,8 @@ create table recrui_info(
     title varchar,
     salary varchar,--給与--
     welfare varchar,--福利厚生--
-    job_description text--募集詳細--
+    job_description text,--募集詳細--
+    update_time timestamp
+
 );
 

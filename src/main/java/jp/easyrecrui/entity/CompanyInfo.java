@@ -1,6 +1,7 @@
 package jp.easyrecrui.entity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,4 +28,5 @@ public class CompanyInfo {
 	private String picture;
 	private String adress;
 	private String nearestStation;
+	private Timestamp updateTime;
 }

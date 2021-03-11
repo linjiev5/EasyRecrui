@@ -20,22 +20,22 @@
 					th:if="${not #strings.isEmpty(message)}"></p>
 				<div id="user_info">
 					<label for="text">ユーザ名（アカウント）:</label> <br /> <input type="text"
-						class="form-control" id="user" name="userId"
+						class="form-control"name="userName"
 						placeholder="ユーザ名を入力してください" required="required">
 				</div>
 				<div id="user_info">
 					<label for="pwd">パスワード:</label><br /> <input type="password"
-						class="form-control" id="pwd" name="userPwd"
+						class="form-control" name="userPwd"
 						placeholder="パスワードを入力してください" required="required">
 				</div>
 				<div id="user_info">
 					<label for="email">名前:</label> <br />
-					<input type="text" class="form-control" id="name"name="name"
+					<input type="text" class="form-control" name="name"
 						placeholder="名前を入力してください" required="required">
 				</div>
 				<div id="user_info">
 					<label for="email">メール:</label><br /> <input type="text"
-						class="form-control" id="mail"name="mail" placeholder="メールを入力してください"
+						class="form-control" name="mail" placeholder="メールを入力してください"
 						required="required">
 				</div>
 				<div id="user_info">
@@ -50,12 +50,17 @@
 				</div>
 				<div id="user_info">
 					<label for="email">住所:</label> <br />
-					<input type="datetime" class="form-control" id="adress" name="adress"
+					<input type="datetime" class="form-control"  name="adress"
+						placeholder="住所を入力してください" required="required">
+				</div>
+				<div id="user_info">
+					<label for="email">最寄駅:</label> <br />
+					<input type="datetime" class="form-control" name="nearestStation"
 						placeholder="住所を入力してください" required="required">
 				</div>
 				<div id="user_info">
 					<label for="email">誕生日:</label><br /> <input type="date"
-						class="form-control" id="birth"name="birth" placeholder="xxxx/xx/xx"
+						class="form-control"name="birthday" placeholder="xxxx/xx/xx"
 						required="required">
 				</div>
 				<button type="submit" class="btn btn-primary">登録</button>

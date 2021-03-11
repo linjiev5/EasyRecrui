@@ -10,6 +10,6 @@ public class MyMvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginHandlerInterceptor())
-		.addPathPatterns(UrlPath.MYPAGE_VIEW,UrlPath.UPDATE_USER,UrlPath.USER_RESUME).excludePathPatterns(UrlPath.JOBPAGE_VIEW,UrlPath.LOGIN,UrlPath.INDEX_VIEW,UrlPath.REGIST_VIEW,"../js/**","../img/**","../css/**");
+		.addPathPatterns(UrlPath.MYPAGE_VIEW,UrlPath.UPDATE_USER_INFO,UrlPath.USER_RESUME).excludePathPatterns(UrlPath.JOBPAGE_VIEW,UrlPath.LOGIN,UrlPath.INDEX_VIEW,UrlPath.REGIST_VIEW,"../js/**","../img/**","../css/**");
 	}
 }

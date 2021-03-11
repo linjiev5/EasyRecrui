@@ -1,17 +1,19 @@
 package jp.easyrecrui.object;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.sql.Timestamp;
 
-@Getter
-@Setter
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OUserLogin extends OUser{
-
-    private boolean rocked;
-    private String userRole;
-
+public class OUserLogin {
+	private String userName;
+	private String password;
+	private boolean rocked;
+	private String userRole;
+	private Timestamp createTime;
+	private Timestamp updateTime;
 }

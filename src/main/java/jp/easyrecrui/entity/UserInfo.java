@@ -1,10 +1,9 @@
 package jp.easyrecrui.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,15 +18,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "userInfo")
 public class UserInfo {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 	private String userName;
-	private String icon;
+	private String name;
 	private String mail;
 	private String tel;
 	private Integer sex;
 	private String adress;
 	private String nearestStation;
 	private Date birthday;
+	private Timestamp updateTime;
 
 }

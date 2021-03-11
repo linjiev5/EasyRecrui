@@ -1,21 +1,23 @@
 package jp.easyrecrui.object;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 /**
  * 履歴書
  * @author user
  *
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OResume {
 
 	private String userName;
+	private String icon;
 	private String nationality;// 国籍
 	private String nameKatakana;
 	private String educationalBackground;// 学歴
@@ -25,6 +27,6 @@ public class OResume {
 	private String selfPublicRelations;// 自己PR
 	private String hobbiesAndSkills;// 趣味・特技
 	private String licenceOrQualification;// 免許・資格
-
+	private Timestamp updateTime;
 
 }

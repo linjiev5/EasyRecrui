@@ -1,12 +1,12 @@
 package jp.easyrecrui.object;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.sql.Timestamp;
 
-@Getter
-@Setter
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ORecruiInfo {
@@ -18,5 +18,6 @@ public class ORecruiInfo {
 	private String salary;// 給与
 	private String wellfare;// 福利厚生
 	private String jobDescription;// 募集詳細
+	private Timestamp updateTime;
 
 }

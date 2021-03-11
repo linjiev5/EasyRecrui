@@ -1,14 +1,13 @@
 package jp.easyrecrui.object;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OCompanyInfo {
@@ -23,4 +22,6 @@ public class OCompanyInfo {
 	private String picture;
 	private String adress;
 	private String nearestStation;
+	private Timestamp updateTime;
+
 }

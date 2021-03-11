@@ -8,4 +8,6 @@ import jp.easyrecrui.entity.Resume;
 @Repository
 public interface ResumeRepository extends JpaRepository<Resume, String> {
 
+	Resume findByUserName(String userName);
+
 }

@@ -39,12 +39,14 @@
 			<div id="page-inner">
 
 
+
 				<div class="row">
 					<div class="col-md-12">
 						<h1 class="page-header" th:text="${session?.loginUser?.name}">
 							Dashboard</h1>
-						<small>個人情報</small><a class="btn btn-primary btn-sm" th:href="@{/updateAppkyUser}"+${applyUserInfo}>編集</a>
-							<a class="btn btn-danger btn-sm" th:href=@{/withdrawal}>退会</a>
+						<small>個人情報</small><a class="btn btn-primary btn-sm"
+							th:href="@{/login/updateUserInfo}"+${oUserInfo.getName}>編集</a> <a
+							class="btn btn-danger btn-sm" th:href=@{/withdrawal}>退会</a>
 					</div>
 				</div>
 
@@ -52,27 +54,33 @@
 				<table class="table table-bordered" style="color: red">
 					<thead>
 						<tr>
+							<th>ユーザ名</th>
 							<th>名前</th>
-							<th>アカウント</th>
 							<th>メール</th>
+							<th>電話番号</th>
 							<th>性別</th>
 							<th>住所</th>
+							<th>最寄駅</th>
 							<th>誕生日</th>
+
 						</tr>
 					</thead>
 					<tbody>
 
-						<tr th:each="data:${applyUserInfo}" th:object="${data}">
-							<td th:text="*{name}"></td>
-							<td th:text="*{mail}"></td>
-							<td th:text="*{tel}"></td>
-							<td th:text="*{sex==1?'男':'女'}"></td>
-							<td th:text="*{adress}"></td>
-							<td th:text="*{birth}"></td>
+						<tr>
+							<td th:text="${userInfo.getUserName}"></td>
+							<td th:text="${userInfo.getName}"></td>
+							<td th:text="${userInfo.getMail}"></td>
+							<td th:text="${userInfo.getTel}"></td>
+							<td th:text="${userInfo.getSex==1?'男':'女'}"></td>
+							<td th:text="${userInfo.getAdress}"></td>
+							<td th:text="${userInfo.getNearestStation}"></td>
+							<td th:text="${userInfo.getBirthday}"></td>
+
 						</tr>
 					</tbody>
 				</table>
-
+				<p th:text="更新時間"+"${userInfo.getUpdateTime}"></p>
 
 
 				<!-- /.foot  -->

@@ -7,5 +7,7 @@ import jp.easyrecrui.entity.UserInfo;
 
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
+	UserInfo findByUserName(String userName);
+
 
 }

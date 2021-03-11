@@ -17,12 +17,24 @@
 		style="height: 70px; z-index: 20000" th:fragment="top">
 		<a th:href="@{/index}">
 			<div class="pos_a " style="width: 370px; left: 100px; top: 0px">
-				<img src="../img/logo.png" class="fl margint13">
+				<img src="../img/logo.png" class="fl margint13" style="width:120px;height:54px">
 				<div class="fl fnt18 fncolorlan marginl20 "
-					style="width: 230px; height: 70px; line-height: 70px;" id="zgno1">Easy求人サイト</div>
+					style="width: 230px; height: 70px; line-height: 70px;" id="zgno1">頑張ってます！</div>
 			</div>
 		</a>
+		<script>
+			$(window).resize(function() {
+				if ($(window).width() < 1400) {
+					$('#zgno1').hide();
+				} else {
+					$("#zgno1").show();
+				}
 
+			});
+			if ($(window).width() > 1400) {
+				$('#zgno1').show();
+			}
+		</script>
 		<div class=" center  fnt18 "
 			style="width: 600px; height: 70px; line-height: 70px">
 			<a th:href="@{/main}">
@@ -41,19 +53,19 @@
 			style="width: 220px; right: 100px; top: 0px; height: 70px; line-height: 70px"
 			th:unless="${session?.loginUser}">
 
-			<a th:href="@{/login}" >
+			<a th:href="@{/login}">
 				<div class="fl fnt10 fncolorhui" style="width: 90px;">応募</div>
-			</a> <a href="" >
+			</a> <a href="">
 				<div class="fl fnt10  marginl40 fncolorhui" style="width: 90px;">企業</div>
 			</a>
 		</div>
 		<div class="pos_a"
 			style="width: 220px; right: 100px; top: 0px; height: 70px; line-height: 70px"
 			th:if="${session?.loginUser}">
-			<a th:href="@{/login/mypage}" th:text="${session?.loginUser?.name}"></a>
+			<a th:href="@{/login/mypage}" th:text="${session?.loginUser.?name}"></a>
 
 
-				<a th:href="@{/logout}" style="color: red">ログアウト</a>
+			<a th:href="@{/logout}" style="color: red">ログアウト</a>
 
 
 
