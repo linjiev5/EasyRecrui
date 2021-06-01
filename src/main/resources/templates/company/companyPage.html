@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.80.0">
+<title>会社情報</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+<!-- Custom styles for this template -->
+<link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+	<!--/. NAV TOP  -->
+	<div th:insert="~{main/part::top}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- /. 左側  -->
+			<div th:insert="~{main/part::sidebar(active ='companyInfo')}"></div>
+
+
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2" th:text="${companyPageInfo?.companyName}">Dashboard</h1>
+					<p style="color: red" th:text="${message}"
+						th:if="${not #strings.isEmpty(message)}"></p>
+					<div class="btn-toolbar mb-2 mb-md-0">
+						<div class="btn-group mr-2">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-sm btn-outline-secondary"
+								data-toggle="modal" data-target="#changeInfo">会社情報編集</button>
+							<!-- Modal -->
+							<div class="modal fade" id="changeInfo" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalCenterTitle"
+								data-backdrop="static" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalCenterTitle">会社情報編集</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form th:action="@{/saveCompanyInfo}" method="post">
+
+												<div id="user_info" style="display: none">
+													<label for="text">uid:</label> <br /> <input type="number"
+														th:value="${companyPageInfo.uid}" class="form-control"
+														id="user" name="uid" readonly="readonly">
+												</div>
+												<div id="user_info">
+													<label for="email">会社名:</label> <br /> <input type="text"
+														class="form-control" id="name" name="companyName"
+														th:value="${companyPageInfo.companyName}"
+														required="required">
+												</div>
+												<div id="user_info">
+													<label for="email">メール:</label><br /> <input type="text"
+														th:value="${companyPageInfo.mail}" class="form-control"
+														id="mail" name="mail" required="required">
+												</div>
+												<div id="user_info">
+													<label for="email">電話番号:</label><br /> <input
+														type="number" th:value="${companyPageInfo.tel}"
+														class="form-control" name="tel" required="required">
+												</div>
+												<div id="user_info">
+													<label for="email">設立時間:</label><br /> <input type="date"
+														class="form-control" id="birth" name="foundedTime"
+														th:value="${companyPageInfo.foundedTime}"
+														required="required">
+												</div>
+												<div id="user_info">
+													<label for="email">住所:</label> <br /> <input type="text"
+														class="form-control" id="adress" name="adress"
+														th:value="${companyPageInfo.adress}" required="required">
+												</div>
+												<div id="user_info">
+													<label for="email">会社紹介:</label> <br />
+													<textarea class="form-control" name="info"
+														th:text="${companyPageInfo?.info}" required="required"></textarea>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">閉じる</button>
+													<button type="submit" class="btn btn-primary">保存する</button>
+
+												</div>
+
+											</form>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-sm btn-outline-secondary"
+							data-toggle="modal" data-target="#changePassword">パスワード変更</button>
+						<!-- Modal -->
+						<div class="modal fade" id="changePassword" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalCenterTitle"
+							data-backdrop="static" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalCenterTitle">パスワード変更</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form th:action="@{/savePassword}" method="post" role="form"
+											id="myform">
+
+											<div class="form-group">
+												<label>旧パスワード</label> <input class="form-control"
+													name="password" type="password"
+													placeholder="パスワードを入力してください" required="required">
+											</div>
+											<div class="form-group">
+												<label>新パスワード</label> <input class="form-control"
+													name="newPassword" type="password" id="new_password"
+													placeholder="新しいパスワードを入力してください" required="required">
+											</div>
+
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">閉じる</button>
+												<button type="reset" class="btn btn-default">クリア</button>
+												<button id="savePassword" type="submit"
+													class="btn btn-primary">保存する</button>
+											</div>
+										</form>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<img th:src="${companyPageInfo?.icon}" id="avatar_img" alt="Avatar"
+					style="width: 50px">
+				<form role="form" th:action="@{/uploadCompanyImg}" method="post"
+					enctype="multipart/form-data">
+					<input type="file" name="icon" value="アイコンを変える">
+					<button type="submit" class="btn btn-primary btn-sm">アイコンを変更</button>
+				</form>
+
+
+				<br /> <label>会社名:</label> <strong
+					th:text="${companyPageInfo.companyName}"></strong> <br /> <label>メール:</label>
+				<strong th:text="${companyPageInfo.mail}"></strong> <br /> <label>電話番号:</label><strong
+					th:text="${companyPageInfo.tel}"></strong> <br /> <label>設立時間:</label>
+				<strong th:text="${companyPageInfo.foundedTime}"></strong> <br /> <label>住所:</label>
+				<strong th:text="${companyPageInfo.adress}"></strong>   <br /> <label>会社紹介:</label><strong
+					th:text="${companyPageInfo.info}"></strong> <br /><br />
+				<!-- 更新時間 -->
+				<p th:text="'更新時間:'+${companyPageInfo.updateTime}"></p>
+
+
+
+
+
+			</main>
+		</div>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	</script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

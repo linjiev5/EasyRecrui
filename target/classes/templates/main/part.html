@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home</title>
+<!-- Bootstrap Styles-->
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<!-- FontAwesome Styles-->
+<link href="../css/font-awesome.css" rel="stylesheet" />
+<!-- Morris Chart Styles-->
+<link href="../js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+<!-- Custom Styles-->
+<link href="../css/custom-styles.css" rel="stylesheet" />
+<!-- Google Fonts-->
+<link href='http://fonts.useso.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../css/banner.css" type="text/css">
+<link rel="stylesheet" href="../css/top.css" type="text/css">
+
+</head>
+<div id="wrapper">
+	<!-- Myページ用 -->
+	<nav th:fragment="top"
+		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3"
+			th:href="@{/index}">Easy求人</a>
+		<button class="navbar-toggler position-absolute d-md-none collapsed"
+			type="button" data-toggle="collapse" data-target="#sidebarMenu"
+			aria-controls="sidebarMenu" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div th:unless="${session?.userRole}">
+			<ul class="navbar-nav px-3" th:unless="${session?.userRole}">
+				<li class="nav-item text-nowrap"><a th:href="@{/login}">
+						応募ログイン </a></li>
+			</ul>
+			<ul class="navbar-nav px-3" th:unless="${session?.userRole}">
+				<li class="nav-item text-nowrap"><a href=""> 企業ログイン </a></li>
+			</ul>
+		</div>
+		<ul class="navbar-nav px-3" th:if="${session?.userRole}">
+			<li class="nav-item text-nowrap"><a class="nav-link"
+				th:href="@{/logout}" style="color: #FFFFFF">ログアウト</a></li>
+		</ul>
+
+	</nav>
+
+	<!--/. NAV TOP  -->
+
+	<nav th:fragment="main"
+		class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" th:href="@{/index}">Easy求人</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a
+					th:class="${active=='regular'?'nav-link active':'nav-link'}"
+					th:href="@{/jobPage}">正社員</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='part'?'nav-link active':'nav-link'}"
+					th:href="@{/partPage}">アルバイト</a></li>
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="dropdown01"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					th:if="${session?.userRole?.role=='user'}"
+					th:text="${session.userRole.name}"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" th:href="@{/login/mypage}">マイページ</a> <a
+							class="dropdown-item" th:href="@{/login/mySendResume}">提出した履歴書</a>
+						<a class="dropdown-item" th:href="@{/logout}">ログアウト</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="dropdown01"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					th:if="${session?.userRole?.role=='admin'}"
+					th:text="${session.userRole.name}"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" th:href="@{/login/userManagement}">ユーザ管理</a>
+						<a class="dropdown-item" th:href="@{/login/companyManagement}">会社管理</a>
+						<a class="dropdown-item" th:href="@{/login/message}">message<span
+							th:unless="${messageCount==0}" class="badge badge-danger"
+							th:text="${messageCount}"></span></a> <a class="dropdown-item"
+							th:href="@{/logout}">ログアウト</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="dropdown01"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					th:text="${companyName}"
+					th:if="${session?.userRole?.role=='company'}"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" th:href="@{/login/companyInfo}">カンパニーページ</a>
+						<a class="dropdown-item" th:href="@{/login/mypage}">募集者マイページ</a><a
+							class="dropdown-item" th:href="@{/login/receivedResume}">
+							もらった履歴書 </a> <a class="dropdown-item" th:href="@{/logout}">ログアウト</a>
+					</div></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" action="@{/searchJob}"
+				method="get">
+				<input class="form-control mr-sm-2" type="text" name="key"
+					placeholder="会社名また職位を入力してください" aria-label="Search">
+				<button class="btn btn-secondary my-2 my-sm-0" type="submit">検索</button>
+			</form>
+		</div>
+	</nav>
+
+	<!--/. NAV TOP  -->
+
+	<nav th:fragment="forSearch"
+		class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" th:href="@{/index}">Easy求人</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a
+					th:class="${active=='regular'?'nav-link active':'nav-link'}"
+					th:href="@{/jobPage}">正社員</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='part'?'nav-link active':'nav-link'}"
+					th:href="@{/partPage}">アルバイト</a></li>
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="dropdown01"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					th:if="${session?.userRole?.role=='user'}"
+					th:text="${session.userRole.name}"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" th:href="@{/login/mypage}">マイページ</a> <a
+							class="dropdown-item" th:href="@{/login/mySendResume}">提出した履歴書</a>
+						<a class="dropdown-item" th:href="@{/logout}">ログアウト</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="dropdown01"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					th:if="${session?.userRole?.role=='admin'}"
+					th:text="${session.userRole.name}"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" th:href="@{/login/userManagement}">ユーザ管理</a>
+						<a class="dropdown-item" th:href="@{/login/companyManagement}">会社管理</a>
+						<a class="dropdown-item" th:href="@{/login/recruiManaForAdmin}">会社管理</a>
+						<a class="dropdown-item" th:href="@{/login/message}">message<span
+							th:unless="${messageCount==0}" class="badge badge-danger"
+							th:text="${messageCount}"></span></a> <a class="dropdown-item"
+							th:href="@{/logout}">ログアウト</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="dropdown01"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					th:text="${companyName}"
+					th:if="${session?.userRole?.role=='company'}"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" th:href="@{/login/companyInfo}">カンパニーページ</a>
+						<a class="dropdown-item" th:href="@{/login/mypage}">募集者マイページ</a><a
+							class="dropdown-item" th:href="@{/login/receivedResume}">
+							もらった履歴書 </a> <a class="dropdown-item" th:href="@{/logout}">ログアウト</a>
+					</div></li>
+			</ul>
+
+		</div>
+	</nav>
+
+
+	<nav id="sidebarMenu"
+		class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+		th:fragment="sidebar">
+		<div class="sidebar-sticky pt-3">
+			<ul class="nav flex-column">
+				<li class="nav-item"><a
+					th:if="${(session.userRole.role)!='admin'}"
+					th:class="${active=='userInfo'?'nav-link active':'nav-link'}"
+					th:href="@{/login/mypage}"> <span data-feather="home"></span>
+						個人情報管理 <span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='myResume'?'nav-link active':'nav-link'}"
+					th:href="@{/login/resume}"
+					th:if="${(session.userRole.role)!='admin'}"> <span
+						data-feather="file-text"></span> 履歴書
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='educationalBackground'?'nav-link active':'nav-link'}"
+					th:href="@{/login/educationalBackground}"
+					th:if="${(session.userRole.role)!='admin'}"> <span
+						data-feather="file-text"></span> 学歴編集
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='workExperience'?'nav-link active':'nav-link'}"
+					th:href="@{/login/workExperience}"
+					th:if="${(session.userRole.role)!='admin'}"> <span
+						data-feather="file-text"></span> 職歴編集
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='companyInfo'?'nav-link active':'nav-link'}"
+					th:href="@{/login/companyInfo}"
+					th:if="${(session.userRole.role) =='company'}"> <span
+						data-feather="file-text"></span> 会社情報
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='companyPicture'?'nav-link active':'nav-link'}"
+					th:href="@{/login/companyPicture}"
+					th:if="${(session.userRole.role) =='company'}"> <span
+						data-feather="file-text"></span> 会社写真
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='user'?'nav-link active':'nav-link'}"
+					th:href="@{/login/userManagement}"
+					th:if="${(session.userRole.role) == 'admin'}"> <span
+						data-feather="bar-chart-2"></span> ユーザ管理
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='company'?'nav-link active':'nav-link'}"
+					th:href="@{/login/companyManagement}"
+					th:if="${(session.userRole.role) == 'admin'}"> <span
+						data-feather="layers"></span> 企業ユーザ管理
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='recruiInfoForAdmin'?'nav-link active':'nav-link'}"
+					th:href="@{/login/recruiManaForAdmin}"
+					th:if="${(session.userRole.role) == 'admin'}"> <span
+						data-feather="file-text"></span> 募集情報管理
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='notice'?'nav-link active':'nav-link'}"
+					th:href="@{/login/notice}"
+					th:if="${(session.userRole.role) == 'admin'}"> <span
+						data-feather="file-text"></span> Notice
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='message'?'nav-link active':'nav-link'}"
+					th:href="@{/login/message}"
+					th:if="${(session.userRole.role) == 'admin'}"> <span
+						data-feather="file-text"></span> Message<span
+						class="badge badge-danger" th:text="${messageCount}"
+						th:unless="${messageCount==0}"></span>
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='recruiInfo'?'nav-link active':'nav-link'}"
+					th:href="@{/login/recruiManagement}"
+					th:if="${(session.userRole.role) == 'company'}"> <span
+						data-feather="file-text"></span> 募集情報管理
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='sendResume'?'nav-link active':'nav-link'}"
+					th:href="@{/login/mySendResume}"
+					th:if="${(session.userRole.role)!='admin'}"> <span
+						data-feather="file-text"></span> 提出した履歴書
+				</a></li>
+				<li class="nav-item"><a
+					th:class="${active=='receivedResume'?'nav-link active':'nav-link'}"
+					th:href="@{/login/receivedResume}"
+					th:if="${(session.userRole.role) =='company'}"> <span
+						data-feather="file-text"></span> もらった履歴書
+				</a></li>
+			</ul>
+
+
+
+		</div>
+	</nav>
+	<!-- /. NAV SIDE  -->
+
+	<!-- Modal -->
+	<div class="modal fade" th:id="'showResume'+${resume?.uid}"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" th:fragment="resume">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 id="exampleModalCenterTitle" th:text="${resume?.name}">履歴書一覧</h5>
+					<br />
+					<div>
+						<sub th:text="'/'+${resume?.nameKatakana}+'/'"></sub> <sub
+							th:text="(${resume?.sex}==1)?'男':'女'"></sub>
+
+					</div>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+
+						<img th:src="${resume?.icon}" id="avatar_img" alt="Avatar"
+							style="width: 80px"> <br />
+						<hr />
+						<div class="fl-right">
+							<p th:text="'趣味・特技：'+${resume?.hobbiesAndSkills}"></p>
+							<p th:text="'免許・資格：'+${resume?.licenceOrQualification}"></p>
+						</div>
+						<div>
+							<p th:text="'国籍：'+${resume?.nationality}"></p>
+							<p th:text="'電話番号：'+(${resume?.tel})"></p>
+							<p th:text="'メール：'+(${resume?.mail})"></p>
+							<p th:text="'誕生日：'+(${resume?.birthday})"></p>
+							<p th:text="'住所：'+(${resume?.adress})"></p>
+							<p th:text="'最寄り駅：'+${resume?.nearestStation}"></p>
+						</div>
+					</div>
+					<div class="form-group"></div>
+					<hr />
+					<div class="form-group">
+						<h6>学歴：</h6>
+						<table>
+							<tr>
+								<th>入学時間</th>
+								<th>卒業時間</th>
+								<th>学校名</th>
+							</tr>
+							<tr th:each="data : ${resume?.educationalBackground}"
+								th:object="${data}">
+								<td th:text="*{startTime}"></td>
+								<td th:text="*{endTime}"></td>
+								<td th:text="*{schoolName}"></td>
+							</tr>
+						</table>
+
+					</div>
+					<div class="form-group">
+						<h6>職歴：</h6>
+						<table>
+							<tr>
+								<th>入社時間</th>
+								<th>退社時間</th>
+								<th>企業名</th>
+								<th>職位</th>
+							</tr>
+							<tr th:each="data : ${resume?.WorkExperience}"
+								th:object="${data}">
+								<td th:text="*{startTime}"></td>
+								<td th:text="*{endTime}"></td>
+								<td th:text="*{companyName}"></td>
+								<td th:text="*{position}"></td>
+							</tr>
+						</table>
+					</div>
+					<hr />
+					<div class="form-group">
+						<h6>希望動機：</h6>
+						<pre style="font-family: arial; font-size: 15px;"
+							th:text="${resume?.motivation}"></pre>
+					</div>
+					<div class="form-group">
+						<h6>自己PR：</h6>
+						<pre style="font-family: arial; font-size: 15px;"
+							th:text="${resume?.selfPublicRelations}"></pre>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">閉じる</button>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" th:id="'showNotice'+${data.noticeId}"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" th:fragment="notice">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 id="exampleModalCenterTitle" th:text="${data?.title}">タイトル</h5>
+
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<pre style="font-family: arial; font-size: 15px;"
+						th:text="${data?.notice}"></pre>
+				</div>
+				<p
+					th:text="'更新時間'+${#dates.format(data?.updateTime,'yyyy-MM-dd HH:mm')}"></p>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">閉じる</button>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+</div>
+
+<div class="w100per bghui  fl " style="height: 190px" th:fragment="foot">
+	<div class=" center  fnt18 fncolorshenhui" style="height: 180px">
+		<div class="fl ">
+			<div class="fl  margint30" style="width: 100px">Easy求人</div>
+			<a href="">
+				<div class="fl  margint30 fncolorhui" style="width: 100px">情報保護</div>
+			</a> <a href="">
+				<div class="fl  margint10 fncolorhui" style="width: 100px">ヘルプ</div>
+			</a>
+		</div>
+		<div class="fr marginl80" style="width: 600px">
+			<div class="fr w100per margint30">開発者Wechat</div>
+			<div class="fr w100per margint30"></div>
+			林杰(リンケツ)
+		</div>
+
+
+
+
+		<div class="fr fnt18 marginl20 " style="width: 150px">
+
+
+			<img src="../img/myWechat.png" class="fr margint20 footewm"
+				id="footewm2" style="width: 159px; height: 150px">
+		</div>
+
+	</div>
+</div>
+<!-- foot -->
+</div>
+
+
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="../js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="../js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Js -->
+<script src="../js/jquery.metisMenu.js"></script>
+<!-- Morris Chart Js -->
+<script src="../js/morris/raphael-2.1.0.min.js"></script>
+<script src="../js/morris/morris.js"></script>
+
+
+<script src="../js/easypiechart.js"></script>
+<script src="../js/easypiechart-data.js"></script>
+
+<script src="../js/Lightweight-Chart/jquery.chart.js"></script>
+
+<!-- Custom Js -->
+<script src="../js/custom-scripts.js"></script>
+
+</body>
+</html>

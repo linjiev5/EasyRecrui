@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.80.0">
+<title>募集情報管理</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+<!-- Custom styles for this template -->
+<link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+	<!--/. NAV TOP  -->
+	<div th:insert="~{main/part::top}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- /. 左側  -->
+			<div th:insert="~{main/part::sidebar(active ='recruiInfoForAdmin')}"></div>
+
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+				<h5>募集詳細管理</h5>
+				<p style="color: red" th:text="${message}"
+					th:if="${not #strings.isEmpty(message)}"></p>
+				<table>
+					<tr>
+						<th>募集方法</th>
+						<th>タイトル</th>
+						<th>給与</th>
+						<th>駅名</th>
+						<th>操作</th>
+					</tr>
+					<tr th:each="data : ${recruiInfos}" th:object="${data}">
+						<td th:text="*{employmentMethod=='regular'?'正社員':'アルバイト'}"></td>
+						<td><a th:text="*{title}"
+							th:href="@{/jobInfo/{id}(id=${data.recruiId})}"></a></td>
+						<td th:text="*{salary}"></td>
+						<td th:text="*{station}"></td>
+						<td><a class="btn btn-sm btn-danger"
+							th:href="@{/deleteRecruiForAdmin/{id}(id=${data.recruiId})}">削除</a></td>
+					</tr>
+				</table>
+
+
+
+
+
+			</main>
+		</div>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	</script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

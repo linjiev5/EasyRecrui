@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.80.0">
+<title>Easy求人</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.6/examples/starter-template/">
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+
+<!-- Custom styles for this template -->
+<link href="../css/starter-template.css" rel="stylesheet">
+</head>
+<body>
+
+	<nav th:insert="~{main/part::main}"></nav>
+
+
+	<main role="main" class="container">
+
+		<div class="container">
+			<br /> <label>会社名:</label> <strong
+				th:text="${companyPageInfo.companyName}"></strong> <br /> <label>メール:</label>
+			<strong th:text="${companyPageInfo.mail}"></strong> <br /> <label>電話番号:</label><strong
+				th:text="${companyPageInfo.tel}"></strong> <br /> <label>設立時間:</label>
+			<strong th:text="${companyPageInfo.foundedTime}"></strong> <br /> <label>住所:</label>
+			<strong th:text="${companyPageInfo.adress}"></strong> <br /> <label>会社紹介:</label><strong
+				th:text="${companyPageInfo.info}"></strong> <br /> <br />
+			<div th:each="data : ${pictures}" th:object="${data}">
+				<div th:text="${data.picId}" style="display: none"></div>
+				<div>
+					<img th:src="*{picture}" style="width: 300px">
+				</div>
+			</div>
+		</div>
+
+		<!-- /container -->
+	</main>
+	<!-- /.container -->
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	</script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

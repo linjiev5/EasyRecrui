@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.80.0">
+<title>ユーザ管理</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+<!-- Custom styles for this template -->
+<link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+	<!--/. NAV TOP  -->
+	<div th:insert="~{main/part::top}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- /. 左側  -->
+			<div th:insert="~{main/part::sidebar(active ='user')}"></div>
+
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+
+				<h5>ユーザ情報編集</h5>
+				<form th:action="@{/updateUserInfoForAdmin}" method="post">
+					<input name="uid" th:value="${userInfo.uid}" style="display: none">
+					<label>id:</label><label th:text="${userInfo.uid}"> </label><br />
+					<label>ユーザ名:</label><input name="userName" type="text"
+						th:value="${userInfo.userName}" required="required"><br />
+					<label>名前:</label><input name="name" type="text"
+						th:value="${userInfo.name}" required="required"> <br /> <label>メール:</label><input
+						name="mail" type="text" th:value="${userInfo.mail}"
+						required="required"><br /> <label>電話番号:</label><input
+						name="tel" type="number" th:value="${userInfo.tel}"
+						required="required"> <br /> <label>性別:</label><label
+						class="radio-inline"><input type="radio" value="1"
+						name="sex" th:checked="${userInfo.sex==1}">男</label> <label
+						class="radio-inline"><input type="radio" name="sex"
+						value="0" th:checked="${userInfo.sex==0}">女</label> <br /> <label>住所:</label><input
+						name="adress" type="text" th:value="${userInfo.adress}"
+						required="required"><br /> <label>誕生日:</label><input
+						name="birthday" type="date" th:value="${userInfo.birthday}">
+					<br /> <label>役柄（Role）: </label><label class="radio-inline"><input
+						type="radio" value="user" name="role"
+						th:checked="${userInfo.role=='user'}">応募者</label> <label
+						class="radio-inline"><input type="radio" name="role"
+						value="company" th:checked="${userInfo.role=='company'}">会社</label><br />
+					<label>ロック: </label> <label class="radio-inline"><input
+						type="radio" value="false" name="rocked"
+						th:checked="${userInfo.rocked==false}">ロックしない</label> <label
+						class="radio-inline"><input type="radio" name="rocked"
+						value="true" th:checked="${userInfo.rocked==true}">ロックする</label><br />
+					<label>操作: </label>
+					<button class="btn btn-primary btn-sm" type="submit"
+						style="margin-right: 20px">保存</button>
+					<a class="btn btn-sm btn-primary btn-sm"
+						th:href="@{/login/userManagement}">戻る</a>
+				</form>
+
+
+
+			</main>
+		</div>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	</script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+</body>
+</html>

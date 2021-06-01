@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.80.0">
+<title>履歴書管理</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, td, th {
+	border: 1px solid black;
+}
+</style>
+<!-- Custom styles for this template -->
+<link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+	<!--/. NAV TOP  -->
+	<div th:insert="~{main/part::top}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- /. 左側  -->
+			<div th:insert="~{main/part::sidebar(active ='myResume')}"></div>
+
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+
+
+				<h1 th:text="${session?.userRole?.name}"></h1>
+				<p th:text="${resume?.nameKatakana}"></p>
+				<!-- 一覧を表示 -->
+				<button class="btn btn-primary " data-toggle="modal"
+					th:data-target="'#showResume'+${resume?.uid}">一覧</button>
+
+				<div th:insert="~{main/part::resume}"></div>
+				<p style="color: red" th:text="${message}"
+					th:if="${not #strings.isEmpty(message)}"></p>
+
+				<img th:src="${resume?.icon}" id="avatar_img" alt="Avatar"
+					style="width: 80px">
+				<form role="form" th:action="@{/uploadResumeImg}" method="post"
+					enctype="multipart/form-data">
+					<input type="file" name="resumeIcon" value="アイコンを変える">
+					<button type="submit" class="btn btn-primary btn-sm">アイコンを変更</button>
+				</form>
+				<hr />
+				<h5>基本情報</h5>
+
+				<form th:action="@{/updateProfile}" method="post" role="form"
+					id="myform">
+					<div>
+						<label for="email">カタカナ:</label> <br /> <input type="text"
+							class="form-control" id="name" name="nameKatakana"
+							th:value="${resume?.nameKatakana}" required="required">
+					</div>
+					<div>
+						<label for="email">国籍:</label> <br /> <input type="text"
+							class="form-control" id="name" name="nationality"
+							th:value="${resume?.nationality}" required="required">
+					</div>
+					<div>
+						<label for="email">趣味・特技:</label> <br /> <input type="text"
+							class="form-control" id="name" name="hobbiesAndSkills"
+							th:value="${resume?.hobbiesAndSkills}" required="required">
+					</div>
+					<div class="form-group">
+						<label for="email">免許・資格:</label> <br /> <input type="text"
+							class="form-control" id="name" name="licenceOrQualification"
+							th:value="${resume?.licenceOrQualification}" required="required">
+					</div>
+					<div class="form-group">
+						<label for="email">最寄駅:</label> <br /> <input type="text"
+							class="form-control" id="name" name="nearestStation"
+							th:value="${resume?.nearestStation}" required="required">
+					</div>
+					<h6>希望動機：</h6>
+					<textarea class="form-control" id="name" name="motivation"
+						th:text="${resume?.motivation}" required="required"></textarea>
+					<hr />
+					<h6>自己PR：</h6>
+					<textarea class="form-control" name="selfPublicRelations"
+						th:text="${resume?.selfPublicRelations}" required="required"></textarea>
+					<button type="submit" class="btn btn-primary">保存する</button>
+
+				</form>
+
+				<!-- 更新時間 -->
+				<p th:text="'更新時間:'+${#dates.format(resume?.updateTime,'yyyy-MM-dd HH:mm')}"></p>
+
+
+
+
+
+
+			</main>
+		</div>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	</script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

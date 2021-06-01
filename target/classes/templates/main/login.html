@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.80.0">
+<title>ログイン</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.6/examples/sign-in/">
+
+
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+
+
+<!-- Custom styles for this template -->
+<link href="../css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+	<div class="container">
+		<form class="form-signin" th:action="@{/login}" method="post">
+			<a th:href="@{/index}"> <img class="mb-4" src="../img/logo.png"
+				alt="Easy求人" width="250" height="100">
+			</a>
+			<p style="color: red" th:text="${message}"
+				th:if="${not #strings.isEmpty(message)}"></p>
+			<label for="inputEmail" class="sr-only">ユーザ</label> <input
+				name="userName" type="text" id="inputEmail" class="form-control"
+				placeholder="ユーザ名を入力してください" required="required"
+				autofocus="autofocus"> <br /> <label for="inputPassword"
+				class="sr-only">パスワード</label> <input type="password" name="userPwd"
+				id="inputPassword" class="form-control" placeholder="パスワードを入力してください"
+				required="required">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">ログイン
+			</button>
+		</form>
+
+		<!-- パスワード忘れModal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#fogot_password">パスワード忘れした</button>
+		<!-- Modal -->
+		<div class="modal fade" id="fogot_password" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">どうされますか</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<!-- 個人情報入力modal -->
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#rember_info">個人情報入力</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="rember_info" tabindex="-1"
+							role="dialog" aria-labelledby="rember_info_title"
+							data-backdrop="static" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="rember_info_title">個人情報</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form th:action="@{/sendInfo}" method="post">
+											<input type="text" class="form-control" name="userNameInfo"
+												placeholder="ユーザ名を入力してください" required="required"> <input
+												type="text" class="form-control" name="nameInfo"
+												placeholder="名前を入力してください" required="required"> <input
+												type="number" class="form-control" name="telInfo"
+												placeholder="電話番号を入力してください" required="required"> <input
+												type="date" class="form-control" name="birthdayInfo"
+												placeholder="xxxx/xx/xx" required="required">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">閉じる</button>
+											<button type="submit" class="btn btn-primary">認証する</button>
+										</form>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- 運営に連絡 modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#contact_management">運営に連絡</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="contact_management" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalCenterTitle"
+							data-backdrop="static" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<form th:action="@{/sendMessage}" method="post">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalCenterTitle">運営にメッセージ</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<input name="userName" placeholder="ユーザ名を入力してください"
+												type="text" class="form-control" required="required">
+											<textarea name="message"  placeholder="身分証明できる内容などを入力してください"
+												 class="form-control" required="required"></textarea>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">閉じる</button>
+											<button type="submit" class="btn btn-primary">連絡する</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">閉じる</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#exampleModalCenter">登録</button>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			data-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">ユーザ登録</h5>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/regist}" method="post">
+							<p class="margint10 fncolorhongse" th:text="${msg}"
+								th:if="${not #strings.isEmpty(msg)}"></p>
+							<div id="user_info">
+								<input type="text" class="form-control" name="userName"
+									placeholder="ユーザ名を入力してください" required="required">
+							</div>
+							<div id="user_info">
+								<input type="password" class="form-control" name="userPwd"
+									placeholder="パスワードを入力してください" required="required">
+							</div>
+							<div id="user_info">
+								<input type="text" class="form-control" name="name"
+									placeholder="名前を入力してください" required="required">
+							</div>
+							<div id="user_info">
+								<input type="text" class="form-control" name="mail"
+									placeholder="メールを入力してください" required="required">
+							</div>
+							<div id="user_info">
+								<input type="number" class="form-control" name="tel"
+									placeholder="電話番号を入力してください" required="required">
+							</div>
+							<div class="form-control">
+								<label class="radio-inline"><input type="radio"
+									name="sex" value="1" checked>男</label> <label
+									class="radio-inline"><input type="radio" name="sex"
+									value="0">女</label>
+							</div>
+							<div id="user_info">
+								<input type="datetime" class="form-control" name="adress"
+									placeholder="住所を入力してください" required="required">
+							</div>
+							<div id="user_info">
+								<input type="date" class="form-control" name="birthday"
+									placeholder="誕生日を選択してください" required="required">
+							</div>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">閉じる</button>
+							<button type="submit" class="btn btn-primary">登録</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
