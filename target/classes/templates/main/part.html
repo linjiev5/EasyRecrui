@@ -105,8 +105,17 @@
 							もらった履歴書 </a> <a class="dropdown-item" th:href="@{/logout}">ログアウト</a>
 					</div></li>
 			</ul>
+
+			<a th:unless="${session?.userRole}"
+				class="btn btn-secondary my-2 my-sm-0" th:href="@{/login}"
+				role="button">ログイン </a> <br> <a
+				th:unless="${session?.userRole}"
+				class="btn btn-secondary my-2 my-sm-0"
+				th:href="@{/companyRegistView}" role="button">企業版登録</a>
+
 			<form class="form-inline my-2 my-lg-0" action="@{/searchJob}"
 				method="get">
+
 				<input class="form-control mr-sm-2" type="text" name="key"
 					placeholder="会社名また職位を入力してください" aria-label="Search">
 				<button class="btn btn-secondary my-2 my-sm-0" type="submit">検索</button>

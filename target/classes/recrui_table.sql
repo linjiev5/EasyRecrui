@@ -1,5 +1,5 @@
--- Project Name : noname
--- Date/Time    : 2021/04/08 13:28:39
+﻿-- Project Name : noname
+-- Date/Time    : 2021/06/11 14:43:03
 -- Author       : user
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
@@ -10,241 +10,242 @@
   この機能は一時的に $$TableName のような一時テーブルを作成します。
 */
 
--- message_to_operation
+-- 運営に連絡
 --* RestoreFromTempTable
 create table message_to_operation (
-  message_id serial not null
-  , uid integer not null
-  , message character varying
-  , read boolean
-  , update_time timestamp
+  message_id SERIAL
+  , uid BIGINT
+  , message VARCHAR(2048)
+  , read BOOLEAN
+  , update_time TIMESTAMP
   , constraint message_to_operation_PKC primary key (message_id)
 ) ;
 
--- resume
+-- 履歴提出
 --* RestoreFromTempTable
 create table resume (
-  resume_id serial not null
-  , recrui_id integer not null
-  , send_uid integer not null
-  , recevie_uid integer not null
-  , result character varying
-  , update_time timestamp
+  resume_id SERIAL
+  , recrui_id BIGINT not null
+  , send_uid BIGINT not null
+  , recevie_uid BIGINT not null
+  , result VARCHAR(2)
+  , update_time TIMESTAMP
   , constraint resume_PKC primary key (resume_id)
 ) ;
 
--- notice
+-- お知らせ
 --* RestoreFromTempTable
 create table notice (
-  notice_id bigserial not null
-  , title character varying
-  , notice text
-  , update_time timestamp
+  notice_id SERIAL
+  , title VARCHAR(128)
+  , notice TEXT
+  , update_time TIMESTAMP
   , constraint notice_PKC primary key (notice_id)
 ) ;
 
--- company_info
+-- 会社情報
 --* RestoreFromTempTable
 create table company_info (
-  uid serial not null
-  , company_name character varying
-  , mail character varying
-  , tel character varying
-  , info character varying
-  , founded_time date
-  , icon character varying
-  , adress character varying
-  , update_time timestamp
+  uid SERIAL
+  , company_name VARCHAR(128)
+  , mail VARCHAR(128)
+  , tel VARCHAR(20)
+  , info VARCHAR(2048)
+  , founded_time DATE
+  , icon VARCHAR(128)
+  , adress VARCHAR(256)
+  , update_time TIMESTAMP
   , constraint company_info_PKC primary key (uid)
 ) ;
 
--- company_picture
+-- 会社写真
 --* RestoreFromTempTable
 create table company_picture (
-  pic_id serial not null
-  , uid integer
-  , picture character varying
+  pic_id SERIAL
+  , uid BIGINT
+  , picture VARCHAR(128)
   , constraint company_picture_PKC primary key (pic_id)
 ) ;
 
--- educational_background
+-- 学歴
 --* RestoreFromTempTable
 create table educational_background (
-  educational_id serial not null
-  , uid integer
-  , start_time date
-  , end_time date
-  , school_name character varying
+  educational_id SERIAL
+  , uid BIGINT
+  , start_time DATE
+  , end_time DATE
+  , school_name VARCHAR(64)
   , constraint educational_background_PKC primary key (educational_id)
 ) ;
 
--- recrui_info
+-- 求人情報表
 --* RestoreFromTempTable
 create table recrui_info (
-  recrui_id serial not null
-  , uid integer
-  , employment_method character varying
-  , category character varying
-  , title character varying
-  , salary character varying
-  , welfare character varying
-  , station character varying
-  , job_details text
+  recrui_id SERIAL
+  , uid BIGINT
+  , employment_method VARCHAR(32)
+  , category VARCHAR(64)
+  , title VARCHAR(128)
+  , salary VARCHAR(32)
+  , welfare VARCHAR(128)
+  , station VARCHAR(64)
+  , job_details TEXT
   , update_time TIMESTAMP
   , constraint recrui_info_PKC primary key (recrui_id)
 ) ;
 
--- resume_info
+-- 履歴書情報
 --* RestoreFromTempTable
 create table resume_info (
-  uid serial not null
-  , icon character varying
-  , nationality character varying
-  , name_katakana character varying
-  , nearest_station character varying
-  , hobbies_and_skills character varying
-  , licence_or_qualification character varying
-  , motivation text
-  , self_public_relations text
-  , update_time timestamp(6) without time zone
+  uid SERIAL
+  , icon VARCHAR(128)
+  , nationality VARCHAR(32)
+  , name_katakana VARCHAR(64)
+  , nearest_station VARCHAR(32)
+  , hobbies_and_skills VARCHAR(64)
+  , licence_or_qualification VARCHAR(64)
+  , motivation TEXT
+  , self_public_relations TEXT
+  , update_time TIMESTAMP
   , constraint resume_info_PKC primary key (uid)
 ) ;
 
--- user_info
+-- ユーザ個人情報
 --* RestoreFromTempTable
 create table user_info (
-  uid serial not null
-  , name character varying
-  , icon character varying
-  , mail character varying
-  , tel character varying
-  , sex integer
-  , adress character varying
-  , birthday date
+  uid SERIAL
+  , name VARCHAR(32)
+  , icon VARCHAR(128)
+  , mail VARCHAR(128)
+  , tel VARCHAR(20)
+  , sex INT
+  , adress VARCHAR(256)
+  , birthday DATE
   , update_time TIMESTAMP
   , constraint user_info_PKC primary key (uid)
 ) ;
 
--- user_login
+-- ログイン表
 --* RestoreFromTempTable
 create table user_login (
-  uid serial not null
-  , user_name character varying not null
-  , password character varying
-  , rocked boolean
-  , user_role character varying
+  uid SERIAL
+  , user_name VARCHAR(128) not null
+  , password VARCHAR(32)
+  , rocked BOOLEAN
+  , user_role VARCHAR(32)
   , create_time TIMESTAMP
   , update_time TIMESTAMP
   , constraint user_login_PKC primary key (uid)
 ) ;
 
--- work_experience
+-- 職歴
 --* RestoreFromTempTable
 create table work_experience (
-  work_id serial not null
-  , uid integer
-  , start_time date
-  , end_time date
-  , conpany_name character varying
-  , position character varying
+  work_id SERIAL
+  , uid BIGINT
+  , start_time DATE
+  , end_time DATE
+  , conpany_name VARCHAR(128)
+  , position VARCHAR(32)
   , constraint work_experience_PKC primary key (work_id)
 ) ;
 
-comment on table message_to_operation is 'message_to_operation';
-comment on column message_to_operation.message_id is 'message_id';
-comment on column message_to_operation.uid is 'uid';
-comment on column message_to_operation.message is 'message';
-comment on column message_to_operation.read is 'read';
-comment on column message_to_operation.update_time is 'update_time';
+comment on table message_to_operation is '運営に連絡';
+comment on column message_to_operation.message_id is 'メッセージID';
+comment on column message_to_operation.uid is 'ユーザID';
+comment on column message_to_operation.message is 'メッセージ';
+comment on column message_to_operation.read is 'チェック';
+comment on column message_to_operation.update_time is '更新時間';
 
-comment on table resume is 'resume';
-comment on column resume.resume_id is 'resume_id';
-comment on column resume.recrui_id is 'recrui_id';
-comment on column resume.send_uid is 'send_uid';
-comment on column resume.recevie_uid is 'recevie_uid';
-comment on column resume.result is 'result';
-comment on column resume.update_time is 'update_time';
+comment on table resume is '履歴提出';
+comment on column resume.resume_id is '履歴ID';
+comment on column resume.recrui_id is '求人情報ID';
+comment on column resume.send_uid is '送るID';
+comment on column resume.recevie_uid is 'もらうID';
+comment on column resume.result is '結果';
+comment on column resume.update_time is '更新時間';
 
-comment on table notice is 'notice';
-comment on column notice.notice_id is 'notice_id';
-comment on column notice.title is 'title';
-comment on column notice.notice is 'notice';
-comment on column notice.update_time is 'update_time';
+comment on table notice is 'お知らせ';
+comment on column notice.notice_id is 'お知らせID';
+comment on column notice.title is 'タイトル';
+comment on column notice.notice is 'お知らせ内容';
+comment on column notice.update_time is '更新時間';
 
-comment on table company_info is 'company_info';
-comment on column company_info.uid is 'uid';
-comment on column company_info.company_name is 'company_name';
-comment on column company_info.mail is 'mail';
-comment on column company_info.tel is 'tel';
-comment on column company_info.info is 'info';
-comment on column company_info.founded_time is 'founded_time';
-comment on column company_info.icon is 'icon';
-comment on column company_info.adress is 'adress';
-comment on column company_info.update_time is 'update_time';
+comment on table company_info is '会社情報';
+comment on column company_info.uid is 'ユーザID';
+comment on column company_info.company_name is '会社名';
+comment on column company_info.mail is 'メール';
+comment on column company_info.tel is '電話番号';
+comment on column company_info.info is '会社情報';
+comment on column company_info.founded_time is '創業時間';
+comment on column company_info.icon is 'アイコンパス';
+comment on column company_info.adress is '住所';
+comment on column company_info.update_time is '更新時間';
 
-comment on table company_picture is 'company_picture';
-comment on column company_picture.pic_id is 'pic_id';
-comment on column company_picture.uid is 'uid';
-comment on column company_picture.picture is 'picture';
+comment on table company_picture is '会社写真';
+comment on column company_picture.pic_id is '写真ID';
+comment on column company_picture.uid is 'ユーザID';
+comment on column company_picture.picture is '写真パス';
 
-comment on table educational_background is 'educational_background';
-comment on column educational_background.educational_id is 'educational_id';
-comment on column educational_background.uid is 'uid';
-comment on column educational_background.start_time is 'start_time';
-comment on column educational_background.end_time is 'end_time';
-comment on column educational_background.school_name is 'school_name';
+comment on table educational_background is '学歴';
+comment on column educational_background.educational_id is '学歴ID';
+comment on column educational_background.uid is 'ユーザID';
+comment on column educational_background.start_time is '入学時間';
+comment on column educational_background.end_time is '卒業時間';
+comment on column educational_background.school_name is '学校名';
 
-comment on table recrui_info is 'recrui_info';
-comment on column recrui_info.recrui_id is 'recrui_id';
-comment on column recrui_info.uid is 'uid';
-comment on column recrui_info.employment_method is 'employment_method';
-comment on column recrui_info.category is 'category';
-comment on column recrui_info.title is 'title';
-comment on column recrui_info.salary is 'salary';
-comment on column recrui_info.welfare is 'welfare';
-comment on column recrui_info.station is 'station';
-comment on column recrui_info.job_details is 'job_details';
-comment on column recrui_info.update_time is 'update_time';
+comment on table recrui_info is '求人情報表';
+comment on column recrui_info.recrui_id is '求人ID';
+comment on column recrui_info.uid is 'ユーザID';
+comment on column recrui_info.employment_method is '雇用方式';
+comment on column recrui_info.category is 'カテゴリ';
+comment on column recrui_info.title is 'タイトル';
+comment on column recrui_info.salary is '給与';
+comment on column recrui_info.welfare is '福利厚生';
+comment on column recrui_info.station is '駅';
+comment on column recrui_info.job_details is '求人詳細';
+comment on column recrui_info.update_time is '更新時間';
 
-comment on table resume_info is 'resume_info';
-comment on column resume_info.uid is 'uid';
-comment on column resume_info.icon is 'icon';
-comment on column resume_info.nationality is 'nationality';
-comment on column resume_info.name_katakana is 'name_katakana';
-comment on column resume_info.nearest_station is 'nearest_station';
-comment on column resume_info.hobbies_and_skills is 'hobbies_and_skills';
-comment on column resume_info.licence_or_qualification is 'licence_or_qualification';
-comment on column resume_info.motivation is 'motivation';
-comment on column resume_info.self_public_relations is 'self_public_relations';
-comment on column resume_info.update_time is 'update_time';
+comment on table resume_info is '履歴書情報';
+comment on column resume_info.uid is 'ユーザID';
+comment on column resume_info.icon is 'アイコンパス';
+comment on column resume_info.nationality is '国籍';
+comment on column resume_info.name_katakana is 'カタカナ';
+comment on column resume_info.nearest_station is '最寄駅';
+comment on column resume_info.hobbies_and_skills is '趣味・特技';
+comment on column resume_info.licence_or_qualification is '免許・資格';
+comment on column resume_info.motivation is '希望動機';
+comment on column resume_info.self_public_relations is '自己PR';
+comment on column resume_info.update_time is '更新時間';
 
-comment on table user_info is 'user_info';
-comment on column user_info.uid is 'uid';
-comment on column user_info.name is 'name';
-comment on column user_info.icon is 'icon';
-comment on column user_info.mail is 'mail';
-comment on column user_info.tel is 'tel';
-comment on column user_info.sex is 'sex';
-comment on column user_info.adress is 'adress';
-comment on column user_info.birthday is 'birthday';
-comment on column user_info.update_time is 'update_time';
+comment on table user_info is 'ユーザ個人情報';
+comment on column user_info.uid is 'ユーザID';
+comment on column user_info.name is '名前';
+comment on column user_info.icon is 'アイコンパス';
+comment on column user_info.mail is 'メール';
+comment on column user_info.tel is '電話番号';
+comment on column user_info.sex is '性別';
+comment on column user_info.adress is '住所';
+comment on column user_info.birthday is '誕生日';
+comment on column user_info.update_time is '更新時間';
 
-comment on table user_login is 'user_login';
-comment on column user_login.uid is 'uid';
-comment on column user_login.user_name is 'user_name';
-comment on column user_login.password is 'password';
-comment on column user_login.rocked is 'rocked';
-comment on column user_login.user_role is 'user_role';
-comment on column user_login.create_time is 'create_time';
-comment on column user_login.update_time is 'update_time';
+comment on table user_login is 'ログイン表';
+comment on column user_login.uid is 'ユーザID';
+comment on column user_login.user_name is 'ユーザ名';
+comment on column user_login.password is 'パスワード';
+comment on column user_login.rocked is 'ロック';
+comment on column user_login.user_role is 'キャラクター';
+comment on column user_login.create_time is '作成時間';
+comment on column user_login.update_time is '更新時間';
 
-comment on table work_experience is 'work_experience';
-comment on column work_experience.work_id is 'work_id';
-comment on column work_experience.uid is 'uid';
-comment on column work_experience.start_time is 'start_time';
-comment on column work_experience.end_time is 'end_time';
-comment on column work_experience.conpany_name is 'conpany_name';
-comment on column work_experience.position is 'position';
+comment on table work_experience is '職歴';
+comment on column work_experience.work_id is '職歴ID';
+comment on column work_experience.uid is 'ユーザID';
+comment on column work_experience.start_time is '入社時間';
+comment on column work_experience.end_time is '退社時間';
+comment on column work_experience.conpany_name is '会社名';
+comment on column work_experience.position is '職位';
+
 
 --管理員追加
 -- usreName:admin
@@ -255,6 +256,7 @@ insert into user_info(name,sex,birthday,update_time)values
 ('管理員',1,'1992-03-11 00:00:00','2000-01-01 00:00:00');
 insert into resume_info(update_time)values('2000-01-01 00:00:00');
 insert into company_info(update_time)values('2000-01-01 00:00:00');
+
 
 -- テーブル削除,調整用
 /*
